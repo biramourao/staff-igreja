@@ -39,6 +39,15 @@ export class CalculadoraPessoasComponent {
     const today = new Date(timeElapsed);
     return today.toLocaleDateString();
   }
+  mensagemWhatsapp(): string {
+    var enderecoApiWhatsapp = "https://api.whatsapp.com/send?text=";
+    var mensagem = `*Contagem de pessoas (`+this.dataAtual()+`)*
+    *Crianças*= `+this.criancas+`
+    *Membros*= `+this.membros+`
+    *Visitantes*= `+this.visitantes+`
+    *Total de pessoas*= `+this.totalPessoas().toString()
+    return encodeURI(enderecoApiWhatsapp+mensagem);
+  }
 
   protected readonly Date = Date;
 }
