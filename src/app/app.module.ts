@@ -10,12 +10,16 @@ import { MenuComponent } from './menu/menu.component';
 import {DividerModule} from "primeng/divider";
 import {BadgeModule} from "primeng/badge";
 import {TieredMenuModule} from "primeng/tieredmenu";
+import { HomeComponent } from './home/home.component';
+import {ImageModule} from "primeng/image";
+import {TabMenuModule} from "primeng/tabmenu";
 
 @NgModule({
   declarations: [
     AppComponent,
     CalculadoraPessoasComponent,
-    MenuComponent
+    MenuComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -24,7 +28,9 @@ import {TieredMenuModule} from "primeng/tieredmenu";
     BrowserAnimationsModule,
     DividerModule,
     BadgeModule,
-    TieredMenuModule
+    TieredMenuModule,
+    ImageModule,
+    TabMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent]
