@@ -13,13 +13,19 @@ import {TieredMenuModule} from "primeng/tieredmenu";
 import { HomeComponent } from './home/home.component';
 import {ImageModule} from "primeng/image";
 import {TabMenuModule} from "primeng/tabmenu";
+import {CampusService} from "./services/campus-service";
+import {HttpClient, HttpClientModule, HttpHandler} from "@angular/common/http";
+import {DropdownModule} from "primeng/dropdown";
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
+  bootstrap: [AppComponent],
   declarations: [
     AppComponent,
     CalculadoraPessoasComponent,
     MenuComponent,
     HomeComponent
+
   ],
   imports: [
     BrowserModule,
@@ -30,9 +36,11 @@ import {TabMenuModule} from "primeng/tabmenu";
     BadgeModule,
     TieredMenuModule,
     ImageModule,
-    TabMenuModule
+    TabMenuModule,
+    HttpClientModule,
+    DropdownModule,
+    FormsModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [CampusService, HttpClient]
 })
 export class AppModule { }

@@ -1,17 +1,22 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {CultosDiaSemana, DiaDaSemana} from "../model/cultos-enum";
+import {CampusService} from "../services/campus-service";
+import {map} from "rxjs";
 
 @Component({
   selector: 'app-calculadora-pessoas',
   templateUrl: './calculadora-pessoas.component.html',
   styleUrls: ['./calculadora-pessoas.component.css']
 })
-export class CalculadoraPessoasComponent {
+export class CalculadoraPessoasComponent implements OnInit {
 
-  criancas: number = 0;
   membros: number = 0;
   visitantes: number = 0;
+  culto: string | undefined = '';
+  campus: Array<string> = new Array<string>();
+  selectedCampus: string = '';
 
-  constructor() {
+  constructor(private campusService : CampusService ) {
   }
   adicionarMembros(numero: number) {
     this.membros+=numero;
@@ -25,14 +30,8 @@ export class CalculadoraPessoasComponent {
   zerarVisitantes() {
     this.visitantes = 0;
   }
-  adicionarCriancas(numero: number) {
-    this.criancas+=numero;
-  }
-  zerarCriancas() {
-    this.criancas = 0;
-  }
   totalPessoas(): number{
-    return this.criancas + this.membros + this.visitantes;
+    return this.membros + this.visitantes;
   }
   dataAtual(): string {
     const timeElapsed = Date.now();
@@ -41,13 +40,36 @@ export class CalculadoraPessoasComponent {
   }
   mensagemWhatsapp(): string {
     var enderecoApiWhatsapp = "https://api.whatsapp.com/send?text=";
-    var mensagem = `*Contagem de pessoas (`+this.dataAtual()+`)*
-    *Crianças*= `+this.criancas+`
-    *Membros*= `+this.membros+`
-    *Visitantes*= `+this.visitantes+`
-    *Total de pessoas*= `+this.totalPessoas().toString()
+    var mensagem = `*Relatório Estratégico Campus `+this.selectedCampus+`*
+    *`+this.culto+`*
+    `+this.dataAtual()+`
+    *Quantidade de pessoas*= `+this.totalPessoas().toString()+`
+    *Conversão*=
+    *Reconciliação*=
+    *Visitantes*= `+this.visitantes
     return encodeURI(enderecoApiWhatsapp+mensagem);
   }
+  carregarCampus(){
+    this.campusService.getCampus().pipe(
+      map(
+        (data) => {
+          for (let dado of data) {
+            this.campus.push(dado.campus);
+          }
+        }
+      )
+    ).subscribe();
+  }
 
-  protected readonly Date = Date;
+  carregarCulto(){
+    this.culto = CultosDiaSemana.get(DiaDaSemana[new Date().getDay()]);
+    if (!this.culto){
+      this.culto = DiaDaSemana[new Date().getDay()];
+    }
+  }
+
+  ngOnInit(): void  {
+    this.carregarCampus();
+    this.carregarCulto();
+  }
 }
