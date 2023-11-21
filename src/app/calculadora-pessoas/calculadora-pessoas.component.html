@@ -1,39 +1,18 @@
+<div class="grid vertical-align-middle align-items-start text-left" xmlns:p="http://www.w3.org/1999/html">
+  <div class="col-6 align-items-start">
+    <span class="text-lg"> Culto: </span>
+    <br>
+    <span class="text-lg"> {{culto}} </span>
+  </div>
+  <div class="col-6 align-items-start">
+    <label for="campus">Campus: </label>
+    <p-dropdown [options]="campus" placeholder="Selecione um campus..." [(ngModel)]="selectedCampus" id="campus"></p-dropdown>
+  </div>
+</div>
 <p-divider></p-divider>
 <div class="grid vertical-align-middle align-items-center text-center">
     <div class="col-12 align-items-center">
         <span class="text-xl">Total de Pessoas: {{totalPessoas()}}</span>
-    </div>
-</div>
-<p-divider></p-divider>
-<div class="grid vertical-align-middle align-items-center text-center">
-    <div class="col-3 align-items-start">
-        <div class="grid vertical-align-middle align-items-center">
-            <div class="col-12 align-items-center">
-                <span class="pi pi-user" pBadge [value]=criancas.toString()> Crianças </span>
-            </div>
-        </div>
-        <div class="grid vertical-align-middle align-items-center">
-            <div class="col-12 align-items-center">
-                <p-button label="limpar" styleClass="p-button-rounded p-button-secondary"   (click)="zerarCriancas()"></p-button>
-            </div>
-        </div>
-    </div>
-    <div class="col-9 align-items-start p-2">
-       <div class="grid vertical-align-middle align-items-center">
-           <div class="col-12 align-items-center p-2">
-               <p-button label="+1" styleClass="p-button-rounded" class="p-2" (click)="adicionarCriancas(1)"></p-button>
-               <p-button label="+5" styleClass="p-button-rounded" class="p-2" (click)="adicionarCriancas(5)"></p-button>
-               <p-button label="+10" styleClass="p-button-rounded" class="p-2" (click)="adicionarCriancas(10)"></p-button>
-           </div>
-       </div>
-        <div class="grid vertical-align-middle align-items-center">
-            <div class="col-12 align-items-center p-2">
-                <p-button label="-1" styleClass="p-button-rounded p-button-danger" class="p-2" (click)="adicionarCriancas(-1)"></p-button>
-                <p-button label="-5" styleClass="p-button-rounded p-button-danger" class="p-2" (click)="adicionarCriancas(-5)"></p-button>
-                <p-button label="-10" styleClass="p-button-rounded p-button-danger" class="p-2" (click)="adicionarCriancas(-10)"></p-button>
-            </div>
-        </div>
-
     </div>
 </div>
 <p-divider></p-divider>
